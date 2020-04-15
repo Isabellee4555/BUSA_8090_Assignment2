@@ -1,0 +1,16 @@
+#!/bin/bash
+
+b 
+
+curl https://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/annotation.tab >annotation.tab
+
+mysql -u awkologist -p compbiol -e 'drop table if exists annotation;'
+
+
+mysql -u awkologist -p compbiol -e 'create table annotation (gene varchar(7), function varchar(30), metabolism varchar(30));'
+
+
+mysqlimport --local -d --ignore-lines=0 -u awkologist -p compbiol annotation.tab
+
+
+mysql -u awkologist -p compbiol -e 'select *from annotation;' -B > annotation.tsv

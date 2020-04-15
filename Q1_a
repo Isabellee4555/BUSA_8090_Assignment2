@@ -1,0 +1,17 @@
+#!/bin/bash 
+
+
+a. 
+curl https://www.staff.hs-mittweida.de/~wuenschi/data/media/compbiolbook/expression.tab > expression.tab
+
+mysql -u awkologist -p compbiol -e 'drop table if exists expression;'
+
+mysql -u awkologist -p compbiol -e 'create table expression (gene varchar(7), expr_value int);'
+
+mysqlimport --local -d --ignore-lines=0 -u awkologist -p compbiol expression.tab
+
+mysql -u awkologist -p compbiol -e 'delete from expression where expr_value is null;'
+
+mysql -u awkologist -p compbiol -e 'select *from expression;' -B > expression.tsv
+
+

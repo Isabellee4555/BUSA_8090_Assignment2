@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+mysql -u awkologist  -p compbiol -e 'select m.FirstName, m.LastName, m.MemberID from Member m where not exists (select * from Entry e1 where e1.MemberID = m.MemberID and e1.Year = 2014) and exists  (select * from Entry e2 where e2.MemberID = m.MemberID);'

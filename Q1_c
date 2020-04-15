@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+(head -n 1 expression.tsv && tail -n +2 expression.tsv |sort -k1) >sorted_expression.tsv
+
+
+(head -n 1 annotation.tsv && tail -n +2 annotation.tsv|sort -k1) >sorted_annotation.tsv
+
+
+join -t $'\t' sorted_expression.tsv sorted_annotation.tsv | awk -F '\t' '{print$1,$2,$3}'
