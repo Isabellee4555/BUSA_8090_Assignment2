@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-mysql -u awkologist compbiol -e ' select m.MemberID, m.LastName, m.FirstName from Member m  where not exists (select e1.MemberID from Entry e1  where not exists (select * from Entry e2  where e2.MemberID= m.MemberID and e2.Year = e1.Year ));'
+mysql -u awkologist -p compbiol -e ' select m.MemberID, m.LastName, m.FirstName from Member m  where not exists (select e1.MemberID from Entry e1  where not exists (select * from Entry e2  where e2.MemberID= m.MemberID and e2.Year = e1.Year ));'
 
 #Alternative method
 
